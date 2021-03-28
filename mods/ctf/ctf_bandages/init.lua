@@ -37,10 +37,18 @@ minetest.register_craftitem("ctf_bandages:bandage", {
 
 				return itemstack
 			else
-				minetest.chat_send_player(name, pname .. " has " .. hp .. " HP. You can't heal them.")
+				hud_event.new(name, {
+				name = "ctf_bandages:failheal",
+				color = "0xFFFFFF",
+				value = pname .. " has " .. hp .. " HP. You can't heal them."
+				})
 			end
 		else
-			minetest.chat_send_player(name, pname.." isn't in your team!")
+				hud_event.new(name, {
+				name = "ctf_bandages:wrongteam",
+				color = "0xFFFFFF",
+				value = pname .. " isn't in your team!"
+				})
 		end
 	end,
 })
